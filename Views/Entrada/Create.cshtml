@@ -1,0 +1,50 @@
+﻿@model MVCBasico.Models.Entrada
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1 class="text-light">Crear</h1>
+
+<h4 class="text-light">Entrada</h4>
+<hr />
+<div class="row text-light">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstablecimientoId" class="control-label"></label>
+                <select asp-for="EstablecimientoId" class ="form-control" asp-items="ViewBag.EstablecimientoId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecitalId" class="control-label"></label>
+                <select asp-for="RecitalId" class ="form-control" asp-items="ViewBag.RecitalId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioId" class="control-label"></label>
+                <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

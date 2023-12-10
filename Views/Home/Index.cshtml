@@ -1,8 +1,79 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<MVCBasico.Models.Recital>
+
+@{
+    ViewData["Title"] = "Home";
 }
 
+<style>
+    .recital-container {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .banda-details {
+        margin-top: 10px;
+    }
+
+    .details-button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .details-button:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="text-light display-4">Bienvenidos a nuestra página de super recitales</h1>
+    <p class="text-light">La principal competencia de AllAcess.</p>
+    <p class="text-light">Peleando por nuestros artistas desde 2007</p>
+
+    <h1 class="text-light display-4">Nuestros recitales:</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var recital in Model)
+        {
+            <div class="recital-container text-light">
+                <h3>@recital.Nombre</h3>
+                <p>Fecha: @recital.Fecha.ToShortDateString()</p>
+                <p>Establecimiento: @recital.Establecimiento?.nombre</p>
+                @if (recital.EstaAgotado == true)
+                {
+                    <p>Entradas agotadas</p>
+                }
+                else
+                {
+                    <p>Entradas disponibles</p>
+                }
+                <button class="details-button" onclick="window.location.href='@Url.Action("Details", "Recital", new { id = recital.Id })'">Ver Detalles del Recital</button>
+
+                @if (recital.Banda != null)
+                {
+                    <div class="banda-details">
+                        <h4>Banda: @recital.Banda.Nombre</h4>
+                        <p>Músicos: @recital.Banda.cantidadMusicos</p>
+                        <p>Género: @recital.Banda.genero</p>
+                        <button class="details-button" onclick="window.location.href='@Url.Action("Details", "Banda", new { id = recital.Banda.Id })'">Ver Detalles de la Banda</button>
+                    </div>
+                }
+                else
+                {
+                    <p>La banda todavía no se ha confirmado.</p>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-light">No hay recitales disponibles.</p>
+    }
 </div>

@@ -1,4 +1,4 @@
-namespace Recital_PNT_MVC.Models
+namespace MVCBasico.Models
 {
     public class ErrorViewModel
     {

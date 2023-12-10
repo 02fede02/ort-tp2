@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MVCBasico.Models.VentaEntradas>
+
+@{
+    ViewData["Title"] = "Indice";
+}
+
+<h1 class="text-light">Indice</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo</a>
+</p>
+<table class="table text-light">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadEntradas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recital)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioTotal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadEntradas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Recital.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioTotal)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

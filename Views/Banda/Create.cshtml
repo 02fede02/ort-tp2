@@ -1,0 +1,56 @@
+﻿@model MVCBasico.Models.Banda
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1 class="text-light">Crear</h1>
+
+<h4 class="text-light">Banda</h4>
+<hr />
+<div class="row text-light">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cantidadMusicos" class="control-label"></label>
+                <input asp-for="cantidadMusicos" class="form-control" />
+                <span asp-validation-for="cantidadMusicos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="genero" class="control-label"></label>
+                <select asp-for="genero" class="form-control">
+                    @{
+                        var enumValues = Enum.GetValues(typeof(Genero)).Cast<Genero>();
+                        foreach (var value in enumValues)
+                        {
+                            <option value="@value">@value</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="genero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefonoContacto" class="control-label"></label>
+                <input asp-for="telefonoContacto" class="form-control" />
+                <span asp-validation-for="telefonoContacto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-light">
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
